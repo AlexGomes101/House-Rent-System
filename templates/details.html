@@ -1,0 +1,431 @@
+{% extends 'base.html'%}
+{% load static%}
+{% block title %}
+EasyRent - details page
+{% endblock %}
+{% block css %}
+<style>
+    .blog-listing {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .gray-bg {
+        background-color: #f5f5f5;
+    }
+
+    .blog-grid {
+        box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
+        border-radius: 5px;
+        overflow: hidden;
+        background: #ffffff;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .blog-grid .blog-img {
+        position: relative;
+    }
+
+    .blog-grid .blog-img .date {
+        position: absolute;
+        background: #fc5356;
+        color: #ffffff;
+        padding: 8px 15px;
+        left: 10px;
+        top: 10px;
+        border-radius: 4px;
+    }
+
+    .blog-grid .blog-img .date span {
+        font-size: 22px;
+        display: block;
+        line-height: 22px;
+        font-weight: 700;
+    }
+
+    .blog-grid .blog-img .date label {
+        font-size: 14px;
+        margin: 0;
+    }
+
+    .blog-grid .blog-info {
+        padding: 20px;
+    }
+
+    .blog-grid .blog-info h5 {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 0 0 10px;
+    }
+
+    .blog-grid .blog-info h5 a {
+        color: #20247b;
+    }
+
+    .blog-grid .blog-info p {
+        margin: 0;
+    }
+
+    .blog-grid .blog-info .btn-bar {
+        margin-top: 20px;
+    }
+
+
+    /* Blog Sidebar
+-------------------*/
+    .blog-aside .widget {
+        box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
+        border-radius: 5px;
+        overflow: hidden;
+        background: #ffffff;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        width: 100%;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .blog-aside .widget-body {
+        padding: 15px;
+    }
+
+    .blog-aside .widget-title {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .blog-aside .widget-title h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #fc5356;
+        margin: 0;
+    }
+
+    .blog-aside .widget-author .media {
+        margin-bottom: 15px;
+    }
+
+    .blog-aside .widget-author p {
+        font-size: 16px;
+        margin: 0;
+    }
+
+    .blog-aside .widget-author .avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .blog-aside .widget-author h6 {
+        font-weight: 600;
+        color: #20247b;
+        font-size: 22px;
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    .blog-aside .post-aside {
+        margin-bottom: 15px;
+    }
+
+    .blog-aside .post-aside .post-aside-title h5 {
+        margin: 0;
+    }
+
+    .blog-aside .post-aside .post-aside-title a {
+        font-size: 18px;
+        color: #20247b;
+        font-weight: 600;
+    }
+
+    .blog-aside .post-aside .post-aside-meta {
+        padding-bottom: 10px;
+    }
+
+    .blog-aside .post-aside .post-aside-meta a {
+        color: #6F8BA4;
+        font-size: 12px;
+        text-transform: uppercase;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .blog-aside .latest-post-aside+.latest-post-aside {
+        border-top: 1px solid #eee;
+        padding-top: 15px;
+        margin-top: 15px;
+    }
+
+    .blog-aside .latest-post-aside .lpa-right {
+        width: 90px;
+    }
+
+    .blog-aside .latest-post-aside .lpa-right img {
+        border-radius: 3px;
+    }
+
+    .blog-aside .latest-post-aside .lpa-left {
+        padding-right: 15px;
+    }
+
+    .blog-aside .latest-post-aside .lpa-title h5 {
+        margin: 0;
+        font-size: 15px;
+    }
+
+    .blog-aside .latest-post-aside .lpa-title a {
+        color: #20247b;
+        font-weight: 600;
+    }
+
+    .blog-aside .latest-post-aside .lpa-meta a {
+        color: #6F8BA4;
+        font-size: 12px;
+        text-transform: uppercase;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .blog-single {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .article {
+        box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
+        border-radius: 5px;
+        overflow: hidden;
+        background: #ffffff;
+        padding: 15px;
+        margin: 15px 0 30px;
+    }
+
+    .article .article-title {
+        padding: 15px 0 20px;
+    }
+
+    .article .article-title h6 {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .article .article-title h6 a {
+        text-transform: uppercase;
+        color: #fc5356;
+        border-bottom: 1px solid #fc5356;
+    }
+
+    .article .article-title h2 {
+        color: #20247b;
+        font-weight: 600;
+    }
+
+    .article .article-title .media {
+        padding-top: 15px;
+        border-bottom: 1px dashed #ddd;
+        padding-bottom: 20px;
+    }
+
+    .article .article-title .media .avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    .article .article-title .media .media-body {
+        padding-left: 8px;
+    }
+
+    .article .article-title .media .media-body label {
+        font-weight: 600;
+        color: #fc5356;
+        margin: 0;
+    }
+
+    .article .article-title .media .media-body span {
+        display: block;
+        font-size: 12px;
+    }
+
+    .article .article-content h1,
+    .article .article-content h2,
+    .article .article-content h3,
+    .article .article-content h4,
+    .article .article-content h5,
+    .article .article-content h6 {
+        color: #20247b;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    img {
+        vertical-align: middle;
+        border-style: none;
+    }
+
+    .section-title h2 {
+        font-weight: 700;
+        color: #20247b;
+        font-size: 45px;
+        margin: 0 0 15px;
+        border-left: 5px solid #fc5356;
+        padding-left: 15px;
+    }
+
+    .section-title {
+        padding-bottom: 45px;
+    }
+
+    .sg-img {
+        width: 125px;
+        overflow: hidden;
+        border: 2px solid #fea116;
+        cursor: pointer;
+    }
+
+    .sg-img.selected {
+        border: 2px solid rgb(9, 165, 69);
+    }
+
+    .blockquote img {
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block main %}
+<div class="blog-single gray-bg">
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col-lg-8 m-15px-tb">
+                <article class="article">
+                    <div class="article-img" id="topImg">
+                        <img src="{{rent.images.all.0.image.url}}" class="w-100" title="" alt="">
+                    </div>
+                    <div class="img-list my-4">
+                        <div class="d-flex flex-wrap gap-2" id="image-container">
+                            {% for image in rent.images.all %}
+                            <div class="sg-img">
+                                <img src="{{ image.image.url }}" class="clsImage" alt="image description">
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="article-title">
+                        <h2>{{rent.title}}</h2>
+                        <div class="media d-flex">
+                            <div class="avatar">
+                                {% if rent.owner.userprofile.photo.url %}
+                                <img src="{{ rent.owner.userprofile.photo.url }}" title="" alt="">
+                            {% endif %}
+                            </div>
+                            <div class="media-body">
+                                <label>{{rent.owner}}</label>
+                                <span>{{rent.created}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <ul>
+                            <li>City : {{rent.city.name}} </li>
+                            <li>Type : {{houseType}} </li>
+                            <li>Rent From : {{rent.rent_from}} </li>
+                            <li>House Name : {{rent.house_name}} </li>
+                            <li>Total Area : {{rent.house_area}} sq. ft </li>
+                            <li>Parking : {% if rent.is_parking %} Yes {% else %} No {% endif %}</li>
+                            <li>Floor No : {{rent.floor_no}}th </li>
+                            <li>Bed Rooms : {{rent.total_bedrooms}} </li>
+                            <li>Bath Rooms : {{rent.total_bathrooms}} </li>
+                            <li>Address : {{rent.address}} </li>
+                            <li>Monthly Rent : ${{rent.monthly_rent}} </li>
+                            <li>Advance Amount : ${{rent.advacne_rent}} </li>
+                        </ul>
+                        <div class="col-lg-12">
+                            {{rent.description|safe}}
+                        </div>
+                        <div class="col-lg-12">
+                            {{rent.map_link|safe}}
+                        </div>
+                        {% if request.user.userprofile.userType == "2" %}
+                        <div class="stripe-payment card p-2 my-2">
+                            {% if rent.is_rented == False%}
+                            <h6>Pay advance amount ${{rent.advacne_rent}} for confirmation of this houese or apartment.
+                            </h6>
+                            <form action="{% url 'checkout' rent.id %}" method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-primary" type="submit">Pay Now</button>
+                            </form>
+                            {% else %}
+                            <h6 class="text-center text-primary">This House or Aparment have been already booked
+                            </h6>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                    </div>
+                    <hr>
+                    <div class="scope-comment-section">
+                        {% include 'comment_section.html' %}
+                    </div>
+
+                </article>
+
+            </div>
+            <div class="col-lg-4 m-15px-tb blog-aside">
+                <div class="widget widget-latest-post">
+                    <div class="widget-title">
+                        <h3>Related Post</h3>
+                    </div>
+                    <div class="widget-body d-flex flex-column">
+                        {% for item in relatedpost%}
+                        <div class="latest-post-aside media">
+                            <div class="lpa-left media-body">
+                                <div class="">
+                                    <h5><a href="{% url 'details' item.id %}">{{item.title}}</a></h5>
+                                </div>
+                                <div class="lpa-meta">
+                                    <a class="name" href="#">
+                                        {{item.owner}}
+                                    </a>
+                                    <a class="date" href="#">
+                                        {{item.created}}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="lpa-right w-100">
+                                <img src="{{item.images.all.0.image.url}}" class="w-100" title="" alt="">
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.clsImage', function () {
+            $("#topImg img").attr("src", $(this).attr("src"));
+            $(".sg-img").removeClass("selected");
+            $(this).parent(".sg-img").addClass("selected");
+        });
+    });
+</script>
+{% endblock %}

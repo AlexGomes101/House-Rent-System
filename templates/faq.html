@@ -1,0 +1,153 @@
+{% extends 'base.html'%}
+{% load static%}
+{% block title %}
+Easyrent-Contact Page
+{% endblock %}
+{% block css %}
+<style>
+    .accordion-item {
+        background-color: #FFFFFF;
+        border: 1px solid #E0E0E0;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .accordion-header {
+        background-color: #fea116;
+        color: #FFFFFF;
+        padding: 15px;
+        font-size: 18px;
+        border: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        outline: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 8px 8px 0 0;
+        transition: background-color 0.3s ease;
+    }
+
+    .accordion-header:hover {
+        background-color: #000000;
+    }
+
+    .accordion-content {
+        background-color: #FAFAFA;
+        /* Very light grey for content */
+        overflow: hidden;
+        padding: 0 15px;
+        max-height: 0;
+        transition: max-height 0.3s ease;
+    }
+
+    .accordion-content p {
+        margin: 15px 0;
+        line-height: 1.5;
+    }
+
+    .icon {
+        transition: transform 0.3s ease;
+    }
+
+    .active .icon {
+        transform: rotate(45deg);
+    }
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+    }
+</style>
+{% endblock %}
+{% block main %}
+{% include 'alert.html'%}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="accordion-container">
+                <h2 class="text-center">Frequently Asked Questions</h2>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        How does EasyRent work?<span class="icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Our platform provides House-Owners with tools to manage their rental properties online, including listing creation, renter screening, lease management, and maintenance tracking. Tenants can easily search for available properties, submit rental applications, and communicate with house-owners through our platform. Our goal is to make the entire rental process seamless and convenient for both House-Owners and Renters.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        What sets EasyRent apart from other rental management platforms? <span class="icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>EasyRent stands out for its user-friendly interface, comprehensive features, exceptional support, and commitment to transparency. Our platform is designed to be intuitive and easy to use, even for users with little to no technical experience. We offer a wide range of features to meet all your rental management needs, backed by a dedicated support team that's always ready to assist you. Plus, we believe in being transparent with our pricing, terms, and policies, so you know exactly what to expect when you choose us.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        Is EasyRent suitable for landlords with multiple properties? <span class="icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Absolutely! EasyRent is perfect for house-owners with multiple properties. Our platform allows you to manage all your properties from one centralized dashboard, making it easy to stay organized and efficient. Whether you have one property or one hundred, our platform can scale to meet your needs.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        How secure is EasyRent? <span class="icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>We take the security of your data seriously. Our platform employs robust security measures to protect your information, including encryption, firewalls, and regular security audits. Additionally, we adhere to industry best practices and comply with all relevant data protection regulations to ensure your data remains safe and secure at all times.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        How can I get started with EasyRent? <span class="icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Getting started with EasyRent is easy! Simply sign up for an account on our website, and you'll gain instant access to our platform. From there, you can start listing your properties, screening renters, and managing your rentals online. If you have any questions or need assistance, our support team is here to help you every step of the way.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        What if I have additional questions or need support? <span class="icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>If you have any additional questions or need support, don't hesitate to contact our friendly support team. You can reach us by phone, email, or through our website, and we'll be happy to assist you with any inquiries or issues you may have.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js%}
+<script>
+    document.querySelectorAll('.accordion-header').forEach(button => {
+        button.addEventListener('click', () => {
+            const accordionContent = button.nextElementSibling;
+
+            button.classList.toggle('active');
+
+            if (button.classList.contains('active')) {
+                accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+            } else {
+                accordionContent.style.maxHeight = 0;
+            }
+
+            // Close other open accordion items
+            document.querySelectorAll('.accordion-header').forEach(otherButton => {
+                if (otherButton !== button) {
+                    otherButton.classList.remove('active');
+                    otherButton.nextElementSibling.style.maxHeight = 0;
+                }
+            });
+        });
+    });
+
+</script>
+{% endblock%}

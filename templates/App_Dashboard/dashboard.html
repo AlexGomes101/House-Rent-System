@@ -1,0 +1,10 @@
+{% extends 'App_Dashboard/base.html'%}
+{% load static%}
+{% block dashboard%}
+{% include 'alert.html'%}
+{% if request.user.is_superuser %}
+{% include 'App_Dashboard/admindashboard.html'%}
+{% else %}
+{% include 'App_Dashboard/otherdashboard.html'%}
+{% endif%}
+{% endblock %}

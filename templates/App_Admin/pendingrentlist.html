@@ -1,0 +1,107 @@
+{% extends 'App_Dashboard/base.html'%}
+{% load static%}
+{% block title %}EasyRent - Pending rent list{% endblock %}
+{% block dashboard%}
+{% block css %}
+<link href="https://cdn.datatables.net/v/dt/dt-2.0.3/datatables.min.css" rel="stylesheet">
+<style>
+    .dataTable {
+        width: 100% !important;
+    }
+</style>
+{% endblock %}
+{% include 'alert.html'%}
+<div class="container-fluid px-4">
+    <div class="row my-5">
+        <div class="col-lg-12 mb-2">
+            <span class="mb-3" style="font-size: 24px;">Pending Rent List</span>
+        </div>
+        <hr>
+        <div class="col">
+            <table class="table bg-white rounded shadow-sm  table-hover" id="rentlist">
+                <thead>
+                    <tr>
+                        <th scope="col" width="50">SL</th>
+                        <th scope="col">Rent Title</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Advannce</th>
+                        <th scope="col">Total Rent</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in myrent_list%}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.city}}</td>
+                        <td>{{item.advacne_rent}}</td>
+                        <td>{{item.monthly_rent}}</td>
+                        <td>{% if item.is_active == True %} <span
+                                class="badge bg-success text-light p-2">Approved</span>
+                            {% else %}
+                            {% if item.is_reject == True%}
+                            <span class="badge bg-danger text-light p-2">Cancel</span>
+                            {% else %}
+                            <span class="badge bg-warning text-light p-2">Pending</span>
+                            {% endif %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center list-action">
+                                <a class="badge bg-success mx-2"
+                                    href="{% url 'App_Account:pendingrentpreview' item.id %}"><i
+                                        class="fas fa-eye"></i></a>
+                                {% if item.is_rented == False %}
+                                {% if item.is_active == False %}
+                                <a class="badge bg-success mx-2 btnApprove"
+                                    href="{% url 'App_Account:approvependingrent' item.id %}"><i
+                                        class="fas fa-check"></i></a>
+                                {% endif%}
+                                {% if item.is_active == True %}
+                                {% if item.is_reject == False %}
+                                <a class="badge bg-danger btnReject"
+                                    href="{% url 'App_Account:cancelpendingrent' item.id %}">X</a>
+                                {% endif%}
+                                {% endif%}
+                                {% endif%}
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block js%}
+<script src="https://cdn.datatables.net/v/dt/dt-2.0.3/datatables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#rentlist').DataTable();
+        $(document).on('click', '.btnApprove', function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+
+            $.alert.open('warning', 'Are you sure you want to approve this post?', function (confirmed) {
+                if (confirmed) {
+                    window.location.href = url;
+                }
+            });
+        })
+        $(document).on('click', '.btnReject', function (event) {
+            event.preventDefault();
+            var url = $(this).attr('href');
+
+            $.alert.open('warning', 'Are you sure you want to cancel this post?', function (confirmed) {
+                if (confirmed) {
+                    window.location.href = url;
+                }
+            });
+        })
+    });
+</script>
+{% endblock%}

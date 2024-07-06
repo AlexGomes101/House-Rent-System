@@ -1,0 +1,71 @@
+{% extends 'base.html'%}
+{% load static%}
+{% block title %}
+Easyrent-Contact Page
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/abouts/about-4/assets/css/about-4.css">
+{% endblock %}
+{% block main %}
+{% include 'alert.html'%}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- About 4 - Bootstrap Brain Component -->
+            <section class="py-3 py-md-5 py-xl-8">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-10 col-lg-8">
+                            <h3 class="fs-5 mb-2 text-secondary text-uppercase">About</h3>
+                            <h2 class="display-5 mb-4">At EasyRent, we're passionate about simplifying the rental management experience for landlords and tenants alike.</h2>
+                            <button type="button" class="btn btn-lg btn-primary mb-3 mb-md-4 mb-xl-5">Connect Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row gy-3 gy-md-4 gy-lg-0">
+                        <div class="col-12 col-lg-6">
+                            <div class="card bg-light p-3 m-0">
+                                <div class="row gy-3 gy-md-0 align-items-md-center">
+                                    <div class="col-md-5">
+                                        <img src="https://bootstrapbrain.com/demo/components/abouts/about-4/assets/img/about-img-2.jpg"
+                                            class="img-fluid rounded-start" alt="Why Choose Us?">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="card-body p-0">
+                                            <h2 class="card-title h4 mb-3">Why Choose Us?</h2>
+                                            <p class="card-text lead">Choose us because we offer innovative rental management technology designed for simplicity and efficiency, ensuring a user-friendly experience for landlords and tenants alike. With comprehensive solutions, exceptional support, and a commitment to transparency, we're trusted by thousands to streamline the rental process.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="card bg-light p-3 m-0">
+                                <div class="row gy-3 gy-md-0 align-items-md-center">
+                                    <div class="col-md-5">
+                                        <img src="https://bootstrapbrain.com/demo/components/abouts/about-4/assets/img/about-img-1.jpg"
+                                            class="img-fluid rounded-start" alt="Visionary Team">
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="card-body p-0">
+                                            <h2 class="card-title h4 mb-3">Visionary Team</h2>
+                                            <p class="card-text lead">Our visionary team comprises diverse talents united by a shared commitment to revolutionizing the rental management industry. With deep expertise in real estate, technology, and customer service, we're dedicated to pushing boundaries and pioneering innovative solutions that exceed expectations.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block js%}
+<script>
+
+</script>
+{% endblock%}
